@@ -1,0 +1,57 @@
+# GraphQL schema example
+#
+# https://gqlgen.com/getting-started/
+
+type Query {
+  recipes: [Recipe!]
+}
+
+type Mutation {
+  addRecipe(recipe: RecipeInput): Recipe!
+}
+
+type Recipe {
+  id: Int!
+  name: String!
+  description: String
+  ingredients: [Ingredient!]
+  steps: [Step!]
+}
+
+input RecipeInput {
+  name: String!
+  description: String
+  ingredients: [IngredientInput!]
+  steps: [StepInput!]
+}
+
+type Ingredient {
+  id: Int!
+  name: String!
+  quantity: Quantity!
+}
+
+input IngredientInput {
+  name: String!
+  quantity: QuantityInput!
+}
+
+type Step {
+  id: Int!
+  description: String!
+}
+
+input StepInput {
+  description: String!
+}
+
+type Quantity {
+  id: Int!
+  unit: String!
+  amount: Float!
+}
+
+input QuantityInput {
+  unit: String!
+  amount: Float!
+}
