@@ -1,0 +1,63 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+"""
+The @defer directive may be specified on a fragment spread to imply de-prioritization, that causes the fragment to be omitted in the initial response, and delivered as a subsequent response afterward. A query with @defer directive will cause the request to potentially return multiple responses, where non-deferred data is delivered in the initial response and data deferred delivered in a subsequent response. @include and @skip take precedence over @defer.
+"""
+directive @defer(if: Boolean = true, label: String) on FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+type Ingredient {
+  id: Int!
+  name: String!
+  quantity: Quantity!
+}
+
+input IngredientInput {
+  name: String!
+  quantity: QuantityInput!
+}
+
+type Mutation {
+  addRecipe(recipe: RecipeInput): Recipe!
+}
+
+type Quantity {
+  amount: Float!
+  id: Int!
+  unit: String!
+}
+
+input QuantityInput {
+  amount: Float!
+  unit: String!
+}
+
+type Query {
+  recipes: [Recipe!]
+}
+
+type Recipe {
+  description: String
+  id: Int!
+  ingredients: [Ingredient!]
+  name: String!
+  steps: [Step!]
+}
+
+input RecipeInput {
+  description: String
+  ingredients: [IngredientInput!]
+  name: String!
+  steps: [StepInput!]
+}
+
+type Step {
+  description: String!
+  id: Int!
+}
+
+input StepInput {
+  description: String!
+}
