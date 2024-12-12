@@ -163,6 +163,7 @@ func StepToAPI(s *dbmodel.Step) *model.Step {
 		return nil
 	}
 	return &model.Step{
+		ID:          s.ID,
 		Description: s.Description,
 	}
 }

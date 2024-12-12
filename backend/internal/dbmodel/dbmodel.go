@@ -26,6 +26,7 @@ type Quantity struct {
 
 type Step struct {
 	gorm.Model
+	ID          int
 	RecipeID    int
 	Description string
 }
