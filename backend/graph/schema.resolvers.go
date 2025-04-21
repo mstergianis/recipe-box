@@ -10,9 +10,19 @@ import (
 	"gitlab.com/mstergianis/recipe-box/graph/model"
 )
 
+// Quantity is the resolver for the quantity field.
+func (r *ingredientResolver) Quantity(ctx context.Context, obj *model.Ingredient) (*model.Quantity, error) {
+	return r.db.IngredientQuantity(obj)
+}
+
 // AddRecipe is the resolver for the addRecipe field.
 func (r *mutationResolver) AddRecipe(ctx context.Context, recipe *model.RecipeInput) (*model.Recipe, error) {
 	return r.db.AddRecipe(recipe)
+}
+
+// DeleteRecipe is the resolver for the deleteRecipe field.
+func (r *mutationResolver) DeleteRecipe(ctx context.Context, id int) (int, error) {
+	return r.db.DeleteRecipe(id)
 }
 
 // Recipes is the resolver for the recipes field.
@@ -28,11 +38,6 @@ func (r *recipeResolver) Ingredients(ctx context.Context, obj *model.Recipe) ([]
 // Steps is the resolver for the steps field.
 func (r *recipeResolver) Steps(ctx context.Context, obj *model.Recipe) ([]*model.Step, error) {
 	return r.db.RecipeSteps(obj)
-}
-
-// Quantity is the resolver for the quantity field.
-func (r *ingredientResolver) Quantity(ctx context.Context, obj *model.Ingredient) (*model.Quantity, error) {
-	return r.db.IngredientQuantity(obj)
 }
 
 // Ingredient returns IngredientResolver implementation.

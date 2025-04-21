@@ -11,6 +11,7 @@ import (
 
 type RecipeBoxDB interface {
 	AddRecipe(recipe *model.RecipeInput) (*model.Recipe, error)
+	DeleteRecipe(ID int) (int, error)
 	Recipes() ([]*model.Recipe, error)
 	RecipeIngredients(recipe *model.Recipe) ([]*model.Ingredient, error)
 	IngredientQuantity(ingredient *model.Ingredient) (*model.Quantity, error)
@@ -91,4 +92,18 @@ func (r *recipeBoxDB) AddRecipe(recipe *model.RecipeInput) (*model.Recipe, error
 	}
 
 	return modelconverter.RecipeToAPI(dbRecipe), nil
+}
+
+func (r *recipeBoxDB) DeleteRecipe(ID int) (int, error) {
+	result := r.Delete(
+		&dbmodel.Recipe{
+			Model: gorm.Model{ID: uint(ID)},
+		},
+	)
+
+	if result.Error != nil {
+		return -1, result.Error
+	}
+
+	return ID, nil
 }

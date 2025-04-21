@@ -15,6 +15,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n    query Recipe {\n      recipes {\n        id\n        description\n        name\n        ingredients {\n          id\n          name\n          quantity { id amount unit }\n        }\n        steps {\n          id\n          description\n        }\n      }\n    }\n  ": types.RecipeDocument,
+    "\nmutation DeleteRecpie($id: Int!) {\n  deleteRecipe(id: $id)\n}\n": types.DeleteRecpieDocument,
     "\nmutation AddRecipe($recipe: RecipeInput) {\n  addRecipe(recipe: $recipe) { id }\n}\n": types.AddRecipeDocument,
 };
 
@@ -36,6 +37,10 @@ export function gql(source: string): unknown;
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n    query Recipe {\n      recipes {\n        id\n        description\n        name\n        ingredients {\n          id\n          name\n          quantity { id amount unit }\n        }\n        steps {\n          id\n          description\n        }\n      }\n    }\n  "): (typeof documents)["\n    query Recipe {\n      recipes {\n        id\n        description\n        name\n        ingredients {\n          id\n          name\n          quantity { id amount unit }\n        }\n        steps {\n          id\n          description\n        }\n      }\n    }\n  "];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\nmutation DeleteRecpie($id: Int!) {\n  deleteRecipe(id: $id)\n}\n"): (typeof documents)["\nmutation DeleteRecpie($id: Int!) {\n  deleteRecipe(id: $id)\n}\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

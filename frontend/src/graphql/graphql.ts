@@ -31,11 +31,17 @@ export type IngredientInput = {
 export type Mutation = {
   __typename?: 'Mutation';
   addRecipe: Recipe;
+  deleteRecipe: Scalars['Int']['output'];
 };
 
 
 export type MutationAddRecipeArgs = {
   recipe?: InputMaybe<RecipeInput>;
+};
+
+
+export type MutationDeleteRecipeArgs = {
+  id: Scalars['Int']['input'];
 };
 
 export type Quantity = {
@@ -86,6 +92,13 @@ export type RecipeQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type RecipeQuery = { __typename?: 'Query', recipes?: Array<{ __typename?: 'Recipe', id: number, description?: string | null, name: string, ingredients?: Array<{ __typename?: 'Ingredient', id: number, name: string, quantity: { __typename?: 'Quantity', id: number, amount: number, unit: string } }> | null, steps?: Array<{ __typename?: 'Step', id: number, description: string }> | null }> | null };
 
+export type DeleteRecpieMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type DeleteRecpieMutation = { __typename?: 'Mutation', deleteRecipe: number };
+
 export type AddRecipeMutationVariables = Exact<{
   recipe?: InputMaybe<RecipeInput>;
 }>;
@@ -95,4 +108,5 @@ export type AddRecipeMutation = { __typename?: 'Mutation', addRecipe: { __typena
 
 
 export const RecipeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Recipe"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"recipes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"ingredients"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"quantity"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"amount"}},{"kind":"Field","name":{"kind":"Name","value":"unit"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"steps"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]}}]} as unknown as DocumentNode<RecipeQuery, RecipeQueryVariables>;
+export const DeleteRecpieDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteRecpie"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deleteRecipe"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}]}}]} as unknown as DocumentNode<DeleteRecpieMutation, DeleteRecpieMutationVariables>;
 export const AddRecipeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"AddRecipe"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"recipe"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"RecipeInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"addRecipe"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"recipe"},"value":{"kind":"Variable","name":{"kind":"Name","value":"recipe"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<AddRecipeMutation, AddRecipeMutationVariables>;

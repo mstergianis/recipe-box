@@ -8,6 +8,7 @@ type Query {
 
 type Mutation {
   addRecipe(recipe: RecipeInput): Recipe!
+  deleteRecipe(id: Int!): Int!
 }
 
 type Recipe {
